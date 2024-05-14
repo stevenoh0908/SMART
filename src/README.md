@@ -7,6 +7,7 @@ src ... where the whole source of the model is located at.
 |_ load ... initial condition loading model. The initial profiles of the quantities are loaded from the module included in this directory.
 |_ config.yml ... configuration file of the model (yml file)
 |_ main.py ... main driver of the SMART model
+```
 
 # Interfaces
 - 초기 조건의 로드
