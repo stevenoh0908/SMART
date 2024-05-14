@@ -1,13 +1,19 @@
-#############################################
-# main.py
-#############################################
-# - The main driver module of SMART Model
-# - 14 May 2024, Yooshin Oh (stevenoh0908@snu.ac.kr)
-#############################################
+'''
+-----
+src/main.py
+-----
+Created: 2024-05-14 09:52:09
+Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
+-----
+Last Modified: 2024-05-14 11:47:24
+Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
+-----
+- Main Driver Module of SMART Model.
+'''
 
 from common.constants import *
 from common.datastructures import *
-from common.save import *
+import common.save
 import fdm.main as fdm
 import load.main as loader
 import rt.main as rt
@@ -15,17 +21,17 @@ import sys, os
 
 class Driver:
 
-	self.config = None
-	self.data = None
+	config = None
+	data = None
 
 	def __init__(self, configyaml_dir="./config.yml"):
-		self.config = loader.parseConfig(configyaml_dir)
-		self.data = loader.init(self.config)
-		loader.loadInitConditions(self.config)
+		self.config = loader.driver.parseConfig(configyaml_dir)
+		self.data = loader.driver.init(self.config) # Return Type: common.datastructures.ModelData
+		loader.driver.loadInitConditions(self.config)
 		pass
 	def run(self):
-		fdm.load(self.data, config=self.config)
-		fdm.run()
+		fdm.driver.load(self.data, config=self.config)
+		fdm.driver.run()
 		pass
 	def result(self):
 		common.save.run(self.data)
