@@ -2,7 +2,8 @@ modelIOConfig:
   configPath: ./config.yml                           # FilePath of this file
   cPProfilePath: ./data/cp_profile.txt               # FilePath to Profile txt of c_p
   RProfilePath: ./data/R_profile.txt                 # FilePath to Profile txt of R of the atmo
-  betaAProfilePath: ./data/beta_a_profile.txt        # FilePath to Profile txt of beta_a of aerosol-mixed of the atmo
+  aSwProfilePath: ./data/a_sw_profile.txt            # FilePath to Profile txt of absorvity of shortwave (< 4 micrometer)
+  aLwProfilePath: ./data/a_lw_profile.txt            # FilePath to Profile txt of absorvity of longwave (> 4 micrometer)
   initTProfilePath: ./data/init_T_profile.txt        # FilePath to Profile txt of Initial Temperature for the model
   outputPath: ./output                               # The output directory where the temperature(t, z) will be saved into.
 modelStructureConfig:

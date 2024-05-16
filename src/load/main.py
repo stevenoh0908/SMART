@@ -5,7 +5,7 @@ load/main.py
 Created: 2024-05-14 11:49:56
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-15 12:16:55
+Last Modified: 2024-05-16 04:58:26
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Load Module.
@@ -38,7 +38,8 @@ class Driver:
         modelIOConfig.configPath = config_io['configPath']
         modelIOConfig.cPProfilePath = config_io['cPProfilePath']
         modelIOConfig.RProfilePath = config_io['RProfilePath']
-        modelIOConfig.betaAProfilePath = config_io['betaAProfilePath']
+        modelIOConfig.aSwProfilePath = config_io['aSwProfilePath']
+        modelIOConfig.aLwProfilePAth = config_io['aLwProfilePath']
         modelIOConfig.initTProfilePath = config_io['initTProfilePath']
         modelIOConfig.outputPath = config_io['outputPath']
         config_structure = config['modelStructureConfig']
