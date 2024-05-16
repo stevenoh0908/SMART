@@ -9,6 +9,8 @@ modelIOConfig:
 modelStructureConfig:
   dz: 100                                            # the vertical cell gap length, in meter
   dt: 600                                            # the time gap in seconds
+  dx: 100                                            # the horizontal cell gap length, in longitudal-direction, in meter
+  dy: 100                                            # the horizontal cell gap length, in latitudual-direction, in meter
   nz: 20                                             # total vertical layer count
   nt: 360                                            # total timestep count
   
