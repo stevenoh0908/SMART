@@ -5,7 +5,7 @@ fdm/main.py
 Created: 2024-05-16 06:14:14
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 11:59:25
+Last Modified: 2024-05-17 01:10:24
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Finite Difference Method Main Module
@@ -15,7 +15,7 @@ import sys
 sys.path.append('../common')
 from common.datastructures import *
 import numpy as np
-import util
+import fdm.util as util
 
 class Driver:
     
@@ -48,7 +48,7 @@ class Driver:
         pass
 
     def setAtmoForcingFunc(self, func):
-        if (type(func) != function):
+        if (not callable(func)):
             raise TypeError("The atmoForcingFunc must be a function")
             pass
         self.atmoForcingFunc = func
@@ -58,7 +58,7 @@ class Driver:
         return self.atmoForcingFunc
     
     def setSurfForcingFunc(self, func):
-        if (type(func) != function):
+        if (not callable(func)):
             raise TypeError("The surfForcingFunc must be a function")
             pass
         self.surfForcingFunc = func
@@ -89,7 +89,7 @@ class Driver:
         print(f"Processing: 1/{nt-1}")
         util.fdm_time_forward_euler(self.modelData, self.modelConfig, targetStep=1, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc)
         # For Other-timesteps, use trapezoidal
-        for timestep in range(1, nt):
+        for timestep in range(2, nt):
             # DEBUG MESSAGE
             print(f"Processing: {timestep}/{nt-1}")
             util.fdm_time_trapezoidal(self.modelData, self.modelConfig, targetStep=timestep, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc)
