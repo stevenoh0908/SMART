@@ -5,7 +5,7 @@ load/main.py
 Created: 2024-05-14 11:49:56
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 05:46:11
+Last Modified: 2024-05-16 05:59:22
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Load Module.
@@ -29,7 +29,7 @@ class Loader:
             raise ValueError("The filepath should be given in string")
             pass
         if (not os.path.isfile(filePath)):
-            raise IOError("The given filepath is not found")
+            raise IOError(f"The given filepath: {filePath} is not found")
             pass
         self.filePath = filePath
         pass
@@ -38,7 +38,7 @@ class Loader:
         return self.filePath
     
     def isActive(self):
-        return type(self.fileDescriptor) != None
+        return type(self.fileDescriptor) != type(None)
     
     def open(self, filePath=None):
         if (self.isActive()):
@@ -55,6 +55,7 @@ class Loader:
             raise IOError("The file is not opened yet")
             pass
         self.fileDescriptor.close()
+        self.fileDescriptor = None
         pass
 
     def readLine(self):
@@ -77,7 +78,7 @@ class Loader:
             pass
         lines = self.fileDescriptor.readlines()
         if (len(lines) != array.shape[0]):
-            raise ValueError("The Size of the given target array and the profile txt is not matched")
+            raise ValueError(f"The Size of the given target array: {array.shape[0]} and the profile txt: {len(lines)} is not matched")
             pass
         for idx, line in enumerate(lines):
             array[idx] = float(line.strip())
@@ -91,7 +92,7 @@ class Driver:
     modelData = None
 
     def parseConfig(self, configPath):
-        if (type(self.modelConfig) != str):
+        if (type(configPath) != str):
             raise ValueError("Invalid configPath. The configPath must be given as str")
             pass
         if (not os.path.isfile(configPath)):
@@ -122,7 +123,7 @@ class Driver:
         self.setConfig(modelConfig)
     
     def setConfig(self, config):
-        if (type(self.modelConfig) != ModelConfig):
+        if (type(config) != ModelConfig):
             raise ValueError("Invalid Config. The Config given in setConfig() must be common.datastructures.ModelConfig")
             pass
         self.modelConfig = config
