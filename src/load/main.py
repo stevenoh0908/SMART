@@ -5,7 +5,7 @@ load/main.py
 Created: 2024-05-14 11:49:56
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 05:59:22
+Last Modified: 2024-05-16 06:09:15
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Load Module.
@@ -176,10 +176,8 @@ class Driver:
             raise ValueError("Invalid Config Path. configyaml_dir must be given in str")
             pass
         self.parseConfig(configyaml_dir)
-        pass
-
-    # TODO
-    # - Add makeInitConditions
+        self.makeInitConditions()
+        return self.modelConfig, self.modelData
     pass
 
 if __name__ != '__main__':
