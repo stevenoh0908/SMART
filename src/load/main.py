@@ -5,8 +5,8 @@ load/main.py
 Created: 2024-05-14 11:49:56
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 11:30:21
-Last Modified: 2024-05-16 11:30:21
+Last Modified: 2024-05-16 11:34:33
+Last Modified: 2024-05-16 11:34:33
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Load Module.
@@ -120,6 +120,7 @@ class Driver:
         modelStructureConfig.dy = float(config_structure['dy'])
         modelStructureConfig.nz = int(config_structure['nz'])
         modelStructureConfig.nt = int(config_structure['nt'])
+        modelStructureConfig.Csua = float(config_structure['Csua'])
         modelConfig = ModelConfig()
         modelConfig.modelIOConfig = modelIOConfig
         modelConfig.modelStructureConfig = modelStructureConfig

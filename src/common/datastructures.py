@@ -5,7 +5,7 @@ common/datastructures.py
 Created: 2024-05-14 11:16:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 11:29:37
+Last Modified: 2024-05-16 11:34:01
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Defines and Manages Common Data Structures Among the Whole Model.
@@ -35,6 +35,7 @@ class ModelStructureConfig:
     dy: float = 100. # m
     nz: int = 21
     nt: int = 360
+    Csua: float = 100. # J/K m^2
     pass
 
 @dataclass

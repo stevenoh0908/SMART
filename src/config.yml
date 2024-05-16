@@ -13,4 +13,5 @@ modelStructureConfig:
   dy: 100                                            # the horizontal cell gap length, in latitudual-direction, in meter
   nz: 20                                             # total vertical layer count
   nt: 360                                            # total timestep count
+  Csua: 100                                          # Heat Capacity of the Surface, per unit area. in J/K m^2
   
