@@ -5,7 +5,7 @@ common/datastructures.py
 Created: 2024-05-14 11:16:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-14 11:45:25
+Last Modified: 2024-05-16 05:09:04
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Defines and Manages Common Data Structures Among the Whole Model.
@@ -21,7 +21,8 @@ class ModelIOConfig:
     configPath: str = "./config.yml"
     cPProfilePath: str = "./data/cp_profile.txt"
     RProfilePath: str = "./data/R_profile.txt"
-    betaAProfilePath: str = "./data/beta_a_profile.txt"
+    aSwProfilePath: str = "./data/a_sw_profile.txt"
+    aLwProfilePath: str = "./data/a_lw_profile.txT"
     initTProfilePath: str = "./data/init_T_profile.txt"
     outputPath: str = "./output"
     pass
