@@ -5,7 +5,7 @@ common/datastructures.py
 Created: 2024-05-14 11:16:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 05:10:29
+Last Modified: 2024-05-16 05:15:36
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Defines and Manages Common Data Structures Among the Whole Model.
@@ -46,6 +46,7 @@ class ModelData:
     temperature: np.ndarray
     cPProfile: np.ndarray
     RProfile: np.ndarray
-    betaAProfile: np.ndarray
+    aSwProfile: np.ndarray
+    aLwProfile: np.ndarray
     initTProfile: np.ndarray
     pass
