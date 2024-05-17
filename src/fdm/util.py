@@ -5,7 +5,7 @@ fdm/util.py
 Created: 2024-05-16 06:14:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-17 01:12:14
+Last Modified: 2024-05-18 12:25:59
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Finite Difference Method Utility Functions
@@ -78,3 +78,9 @@ def fdm_time_trapezoidal(modelData, modelConfig, targetStep=1, atmoForcingFunc=N
     # Calculate Surface Temperature
     modelData.temperature[targetStep,0] = ((2*dt) / (Csua*dx*dy)) * surfForcingFunc(modelData, modelConfig, timestep=targetStep-1) + modelData.temperature[targetStep-2,0]
     return 
+
+# Prevent Model-exploding - Temperature Min Filter
+def min_temp_filter(modelData, modelConfig, targetStep=1):
+    # if there's a less-than-zero record, change it to zero
+    modelData.temperature[targetStep] = modelData.temperature[targetStep].clip(min=0)
+    return

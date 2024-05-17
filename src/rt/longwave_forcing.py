@@ -5,7 +5,7 @@ rt/longwave_forcing.py
 Created: 2024-05-17 12:07:43
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-17 03:22:47
+Last Modified: 2024-05-18 12:18:52
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - LW Forcing Calculation Methods
@@ -45,7 +45,7 @@ def atmo_forcing(modelData, modelConfig, timestep=1):
             second_arg += modelData.aLwProfile[k-1]*(modelData.temperature[timestep,k]**4)*util.transmisttance(modelData,modelConfig,startIdx=iz,endIdx=k-1,type=util.TYPE_LW)
             pass
         third_arg = 2*modelData.temperature[timestep,iz]**4
-        surf_arg = STEFAN_BOLTZMANN_CONST * dx * dy * (modelData.temperature[timestep, 0]**4) * util.transmisttance(modelData, modelConfig, startIdx=0, endIdx=iz-1)
+        surf_arg = STEFAN_BOLTZMANN_CONST * dx * dy * (modelData.temperature[timestep, 0]**4) * util.transmisttance(modelData, modelConfig, startIdx=0, endIdx=iz)
         forcing[iz] = (coef*(first_arg+second_arg-third_arg) + surf_arg) / mass
         pass
     return forcing[1:]

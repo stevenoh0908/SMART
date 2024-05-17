@@ -5,7 +5,7 @@ fdm/main.py
 Created: 2024-05-16 06:14:14
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-17 01:10:24
+Last Modified: 2024-05-18 12:27:01
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Finite Difference Method Main Module
@@ -93,6 +93,8 @@ class Driver:
             # DEBUG MESSAGE
             print(f"Processing: {timestep}/{nt-1}")
             util.fdm_time_trapezoidal(self.modelData, self.modelConfig, targetStep=timestep, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc)
+            # Added 18 May 2024 00:26, added zero-temp-filter for preventing something awful result
+            util.min_temp_filter(self.modelData, self.modelConfig, targetStep=timestep)
             pass
         # DEBUG MESAGE
         print("DONE!")
