@@ -5,8 +5,8 @@ load/main.py
 Created: 2024-05-14 11:49:56
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-17 01:17:32
-Last Modified: 2024-05-17 01:17:32
+Last Modified: 2024-05-17 03:38:54
+Last Modified: 2024-05-17 03:38:54
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Load Module.
@@ -112,6 +112,7 @@ class Driver:
         modelIOConfig.aSwProfilePath = config_io['aSwProfilePath']
         modelIOConfig.aLwProfilePath = config_io['aLwProfilePath']
         modelIOConfig.initTProfilePath = config_io['initTProfilePath']
+        modelIOConfig.densityProfilePath = config_io['densityProfilePath']
         modelIOConfig.outputPath = config_io['outputPath']
         config_structure = config['modelStructureConfig']
         modelStructureConfig.dz = float(config_structure['dz'])
@@ -147,6 +148,7 @@ class Driver:
         self.modelData.RProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
         self.modelData.aSwProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
         self.modelData.aLwProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
+        self.modelData.densityProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
         loader = Loader()
         # Load InitTemp
         loader.open(self.modelConfig.modelIOConfig.initTProfilePath)
@@ -156,11 +158,9 @@ class Driver:
         loader.open(self.modelConfig.modelIOConfig.cPProfilePath)
         loader.loadInto(self.modelData.cPProfile[:])
         loader.close()
-        self.modelData.cPProfile[0] = FILL_VALUE
         # Load R Profile
         loader.open(self.modelConfig.modelIOConfig.RProfilePath)
         loader.loadInto(self.modelData.RProfile[:])
-        self.modelData.RProfile[0] = FILL_VALUE
         loader.close()
         # Load aSw Profile
         loader.open(self.modelConfig.modelIOConfig.aSwProfilePath)
@@ -169,6 +169,10 @@ class Driver:
         # Load aLw Profile
         loader.open(self.modelConfig.modelIOConfig.aLwProfilePath)
         loader.loadInto(self.modelData.aLwProfile[:])
+        loader.close()
+        # Load Density Profile
+        loader.open(self.modelConfig.modelIOConfig.densityProfilePath)
+        loader.loadInto(self.modelData.densityProfile[:])
         loader.close()
         # commit changes and return
         return self.modelData

@@ -5,7 +5,7 @@ common/datastructures.py
 Created: 2024-05-14 11:16:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 11:34:01
+Last Modified: 2024-05-17 03:16:57
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Defines and Manages Common Data Structures Among the Whole Model.
@@ -24,6 +24,7 @@ class ModelIOConfig:
     aSwProfilePath: str = "./data/a_sw_profile.txt"
     aLwProfilePath: str = "./data/a_lw_profile.txT"
     initTProfilePath: str = "./data/init_T_profile.txt"
+    densityProfilePath: str = "./data/density_profile.txt"
     outputPath: str = "./output"
     pass
 
@@ -51,4 +52,5 @@ class ModelData:
     RProfile: np.ndarray = np.zeros(1)
     aSwProfile: np.ndarray = np.zeros(1)
     aLwProfile: np.ndarray = np.zeros(1)
+    densityProfile: np.ndarray = np.zeros(1)
     pass
