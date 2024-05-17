@@ -9,10 +9,10 @@ modelIOConfig:
   outputPath: ./output                               # The output directory where the temperature(t, z) will be saved into.
 modelStructureConfig:
   dz: 1000                                            # the vertical cell gap length, in meter
-  dt: 600                                            # the time gap in seconds
+  dt: 10                                              # the time gap in seconds
   dx: 1000                                            # the horizontal cell gap length, in longitudal-direction, in meter
   dy: 1000                                            # the horizontal cell gap length, in latitudual-direction, in meter
   nz: 21                                             # total vertical layer count
-  nt: 432                                            # total timestep count
+  nt: 10000                                          # total timestep count
   Csua: 2092000000000.                               # Heat Capacity of the Surface, per unit area. in J/K m^2
   
