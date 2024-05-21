@@ -5,7 +5,7 @@ common/datastructures.py
 Created: 2024-05-14 11:16:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 05:53:05
+Last Modified: 2024-05-22 12:07:35
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Defines and Manages Common Data Structures Among the Whole Model.
@@ -24,15 +24,22 @@ class ModelIOConfig:
     aSwProfilePath: str = "./data/a_sw_profile.txt"
     aLwProfilePath: str = "./data/a_lw_profile.txT"
     initTProfilePath: str = "./data/init_T_profile.txt"
-    outputPath: str = "./output"
+    densityProfilePath: str = "./data/density_profile.txt"
+    outputPath: str = "../output"
     pass
 
 @dataclass
 class ModelStructureConfig:
-    dz: float = 100 # m
-    dt: float = 600 # sec
+    filter: str = 'BOTH' # equilibrium-maintain filter mode
+    tolerationCount: int = 1 # equilibrium-maintain filter toleration count
+    solarConstantIncident: float = 340 # incident solar-constant, in W/m2
+    dz: float = 100. # m
+    dt: float = 600. # sec
+    dx: float = 100. # m
+    dy: float = 100. # m
     nz: int = 21
     nt: int = 360
+    Csua: float = 100. # J/K m^2
     pass
 
 @dataclass
@@ -48,4 +55,11 @@ class ModelData:
     RProfile: np.ndarray = np.zeros(1)
     aSwProfile: np.ndarray = np.zeros(1)
     aLwProfile: np.ndarray = np.zeros(1)
+    densityProfile: np.ndarray = np.zeros(1)
+    pass
+
+@dataclass
+class ModelResult:
+    modelData: ModelData = ModelData()
+    modelConfig: ModelConfig = ModelConfig()
     pass

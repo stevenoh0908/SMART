@@ -5,8 +5,8 @@ load/main.py
 Created: 2024-05-14 11:49:56
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-16 06:12:26
-Last Modified: 2024-05-16 06:12:26
+Last Modified: 2024-05-22 12:07:23
+Last Modified: 2024-05-22 12:07:23
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Load Module.
@@ -112,12 +112,19 @@ class Driver:
         modelIOConfig.aSwProfilePath = config_io['aSwProfilePath']
         modelIOConfig.aLwProfilePath = config_io['aLwProfilePath']
         modelIOConfig.initTProfilePath = config_io['initTProfilePath']
+        modelIOConfig.densityProfilePath = config_io['densityProfilePath']
         modelIOConfig.outputPath = config_io['outputPath']
         config_structure = config['modelStructureConfig']
+        modelStructureConfig.filter = str(config_structure['filter'])
+        modelStructureConfig.tolerationCount = int(config_structure['tolerationCount'])
+        modelStructureConfig.solarConstantIncident = float(config_structure['solarConstantIncident'])
         modelStructureConfig.dz = float(config_structure['dz'])
         modelStructureConfig.dt = float(config_structure['dt'])
+        modelStructureConfig.dx = float(config_structure['dx'])
+        modelStructureConfig.dy = float(config_structure['dy'])
         modelStructureConfig.nz = int(config_structure['nz'])
         modelStructureConfig.nt = int(config_structure['nt'])
+        modelStructureConfig.Csua = float(config_structure['Csua'])
         modelConfig = ModelConfig()
         modelConfig.modelIOConfig = modelIOConfig
         modelConfig.modelStructureConfig = modelStructureConfig
@@ -139,11 +146,12 @@ class Driver:
             pass
         # Init ModelData Structure
         self.modelData = ModelData()
-        self.modelData.temperature = np.zeros((self.modelConfig.modelStructureConfig.nt, self.modelConfig.modelStructureConfig.nz+1), dtype=np.float32)
-        self.modelData.cPProfile = np.zeros(self.modelConfig.modelStructureConfig.nz+1, dtype=np.float32)
-        self.modelData.RProfile = np.zeros(self.modelConfig.modelStructureConfig.nz+1, dtype=np.float32)
-        self.modelData.aSwProfile = np.zeros(self.modelConfig.modelStructureConfig.nz+1, dtype=np.float32)
-        self.modelData.aLwProfile = np.zeros(self.modelConfig.modelStructureConfig.nz+1, dtype=np.float32)
+        self.modelData.temperature = np.zeros((self.modelConfig.modelStructureConfig.nt, self.modelConfig.modelStructureConfig.nz), dtype=np.float32)
+        self.modelData.cPProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
+        self.modelData.RProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
+        self.modelData.aSwProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
+        self.modelData.aLwProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
+        self.modelData.densityProfile = np.zeros(self.modelConfig.modelStructureConfig.nz-1, dtype=np.float32)
         loader = Loader()
         # Load InitTemp
         loader.open(self.modelConfig.modelIOConfig.initTProfilePath)
@@ -151,23 +159,23 @@ class Driver:
         loader.close()
         # Load cP Profile
         loader.open(self.modelConfig.modelIOConfig.cPProfilePath)
-        loader.loadInto(self.modelData.cPProfile[1:])
+        loader.loadInto(self.modelData.cPProfile[:])
         loader.close()
-        self.modelData.cPProfile[0] = FILL_VALUE
         # Load R Profile
         loader.open(self.modelConfig.modelIOConfig.RProfilePath)
-        loader.loadInto(self.modelData.RProfile[1:])
-        self.modelData.RProfile[0] = FILL_VALUE
+        loader.loadInto(self.modelData.RProfile[:])
         loader.close()
         # Load aSw Profile
         loader.open(self.modelConfig.modelIOConfig.aSwProfilePath)
-        loader.loadInto(self.modelData.aSwProfile[1:])
-        self.modelData.aSwProfile[0] = FILL_VALUE
+        loader.loadInto(self.modelData.aSwProfile[:])
         loader.close()
         # Load aLw Profile
         loader.open(self.modelConfig.modelIOConfig.aLwProfilePath)
-        loader.loadInto(self.modelData.aLwProfile[1:])
-        self.modelData.aLwProfile[0] = FILL_VALUE
+        loader.loadInto(self.modelData.aLwProfile[:])
+        loader.close()
+        # Load Density Profile
+        loader.open(self.modelConfig.modelIOConfig.densityProfilePath)
+        loader.loadInto(self.modelData.densityProfile[:])
         loader.close()
         # commit changes and return
         return self.modelData

@@ -1,14 +1,21 @@
 modelIOConfig:
-  configPath: ./config.yml                           # FilePath of this file
+  configPath: ./config.yml                            # FilePath of this file
   cPProfilePath: ../data/cp_profile.txt               # FilePath to Profile txt of c_p
   RProfilePath: ../data/R_profile.txt                 # FilePath to Profile txt of R of the atmo
   aSwProfilePath: ../data/a_sw_profile.txt            # FilePath to Profile txt of absorvity of shortwave (< 4 micrometer)
   aLwProfilePath: ../data/a_lw_profile.txt            # FilePath to Profile txt of absorvity of longwave (> 4 micrometer)
   initTProfilePath: ../data/init_T_profile.txt        # FilePath to Profile txt of Initial Temperature for the model
-  outputPath: ./output                               # The output directory where the temperature(t, z) will be saved into.
+  densityProfilePath: ../data/density_profile.txt     # FilePath to Profile txt of Atmospheric Density Profile
+  outputPath: ../output                               # The output directory where the temperature(t, z) will be saved into.
 modelStructureConfig:
-  dz: 100                                            # the vertical cell gap length, in meter
-  dt: 600                                            # the time gap in seconds
-  nz: 20                                             # total vertical layer count
-  nt: 360                                            # total timestep count
+  filter: FORWARD                                        # equilibrium-maintain filter mode: RT -> RadiativeFilter, TEMP -> TemperatureFilter, BOTH -> RadiativeFilter & TemperatureFilter / FORWARD -> Use Euler-Forward instead of Trapezoidal for preventing oscillation.
+  tolerationCount: 1                                  # equilibrium-maintain filter toleration Count: must be greater or equal than 0, integer. Use >2 if TEMP filter is Used.
+  solarConstantIncident: 340                                 # solar-constant from TOA, in W/m2
+  dz: 5000                                            # the vertical cell gap length, in meter
+  dt: 60                                             # the time gap in seconds
+  dx: 5000                                            # the horizontal cell gap length, in longitudal-direction, in meter
+  dy: 5000                                            # the horizontal cell gap length, in latitudual-direction, in meter
+  nz: 2                                             # total vertical layer count
+  nt: 100000                                          # total timestep count
+  Csua: 335331.                                    # Heat Capacity of the Surface, per unit area. in J/K m^2
   
