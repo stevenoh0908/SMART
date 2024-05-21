@@ -42,11 +42,13 @@ class J_calc:
         for i in range(z_bot,z_top+1):
             result*=1-self.a_lw[i]
         return result
-
+    
+    #특정 layer의 sortwave net flux 계산 함수
     def J_sw(self,layer_num):
         return self.sun_cons*self.del_s*((t_calc_sw(layer_num,nz)-t_calc_sw(layer_num-1,nz))
             +(t_calc_sw(0,nz))*self.A_sfc*(t_calc_sw(0,layer_num-1)-t_calc_sw(0,layer_num)))
 
+    #특정 layer의 longwave downward flux 계산 함수 (위에서 아래로 들어오는)
     def F_lw_downward(self,layer_num):
         j=layer_num
         result=0
@@ -54,6 +56,7 @@ class J_calc:
             result+=self.a_lw[k-1]*self.sb_cons*(self.t_pf[k]**4)*self.del_s*t_calc_lw(j,k-1)
         return result
 
+    #특정 layer의 longwave upward flux 계산 함수 (아래에서 위로, 지표 제외)
     def F_lw_upward(self,layer_num):
         j=layer_num
         result=0
@@ -61,12 +64,14 @@ class J_calc:
             result+=self.a_lw[k-1]*self.sb_cons*(self.t_pf[k]**4)*self.del_s*t_calc_lw(k,j-1)
         return result
 
+    #특정 layer의 longwave net flux 계산 함수
     def J_lw(self,layer_num):
         j=layer_num
         abt=self.a_lw[j-1]
         return (abt*(F_lw_downward(j)+F_sw_upward(j)+self.sb_cons*self.del_s*(self.t_pf[0]**4)*t_calc_lw(0,j-1))
             -2*abt*self.sb_cons*(self.t_pf[j]**4)*self.del_s)
 
+    #특정 layer의 net flux 계산 함수
     def J_calc(self,layer_num):
         return J_sw(layer_num)+J_lw(layer_num)
 
