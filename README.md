@@ -41,4 +41,7 @@
 	- Numpy 1.26.3
 	- Matplotlib 3.8.2
 	- PyYAML 5.4.1
+	- Xarray 2023.12.0
+	- Pickle 4.0
+	- netCDF4 1.6.5
 - 모든 코드에 Commenting을 잘 달아주시기 바랍니다. Code Integration과 Debugging의 시간을 단축하고자 합니다.

@@ -5,7 +5,7 @@ src/main.py
 Created: 2024-05-14 09:52:09
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-17 03:35:53
+Last Modified: 2024-05-21 04:16:08
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Driver Module of SMART Model.
@@ -36,7 +36,7 @@ class Driver:
 		driver.run()
 		pass
 	def result(self):
-		common.save.run(self.data)
+		common.save.saveResult(self.data, self.config)
 		pass
 	pass
 
@@ -47,7 +47,7 @@ def run():
 		pass
 	driver = Driver(configyaml_dir)
 	driver.run()
-	# driver.result()
+	driver.result()
 	return driver
 	pass
 
