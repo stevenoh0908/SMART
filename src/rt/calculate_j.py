@@ -7,8 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1guleywn1aqEELSa4-a9G-UEombiRmmQd
 """
 
-#from common.constants import STEFAN_BOLTZMANN_CONST as sb_cons
-sb_cons=5.67*(10**-8)
+from common.constants import STEFAN_BOLTZMANN_CONST as sb_cons
 import math
 import numpy as np
 
