@@ -5,7 +5,7 @@ fdm/main.py
 Created: 2024-05-16 06:14:14
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-21 11:27:28
+Last Modified: 2024-05-22 01:46:30
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Finite Difference Method Main Module
@@ -98,24 +98,42 @@ class Driver:
             print('TEMP-equilibrium maintaining filter ENABLED')
             filterTemp = fdm.filter.FilterTemperatureDelta(self.modelConfig, tolerationCount=self.modelConfig.modelStructureConfig.tolerationCount)
             pass
+        if (self.modelConfig.modelStructureConfig.filter == 'FORWARD'):
+            print('FORWARD-euler integration ENABLED')
+            pass
         # Forward-Euler for the first-timestep
         # Progress Message
         print(f"Processing: 1/{nt-1} ({round((1/nt)*100, 2)}%) | Time Left: Calculating", end='')
         stime = time.time()
         util.fdm_time_forward_euler(self.modelData, self.modelConfig, targetStep=1, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc, filterRT=filterRT, filterTemp=filterTemp)
-        # For Other-timesteps, use trapezoidal
+        # For Other-timesteps, use trapezoidal (if FORWARD filter -> use forward euler instead.)
         mean_step_time = time.time() - stime
-        for timestep in range(2, nt):
-            estimated_time_left = round((nt-1-timestep) * mean_step_time, 2)
-            # Progress Message
-            print(f"\rProcessing: {timestep}/{nt-1} ({round((timestep/nt)*100, 2)}%) | Time Left: {estimated_time_left} s  ", end='')
-            stime = time.time()
-            util.fdm_time_trapezoidal(self.modelData, self.modelConfig, targetStep=timestep, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc, filterRT=filterRT, filterTemp=filterTemp)
-            mean_step_time = (mean_step_time*(timestep-1) + time.time()-stime) / (timestep)
-            # Added 18 May 2024 00:26, added zero-temp-filter for preventing something awful result
-            util.min_temp_filter(self.modelData, self.modelConfig, targetStep=timestep)
+        if (self.modelConfig.modelStructureConfig.filter == 'FORWARD'):
+            for timestep in range(2, nt):
+                estimated_time_left = round((nt-1-timestep) * mean_step_time, 2)
+                # Progress Message
+                print(f"\rProcessing: {timestep}/{nt-1} ({round((timestep/nt)*100, 2)}%) | Time Left: {estimated_time_left} s  ", end='')
+                stime = time.time()
+                util.fdm_time_forward_euler(self.modelData, self.modelConfig, targetStep=timestep, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc, filterRT=filterRT, filterTemp=filterTemp)
+                mean_step_time = (mean_step_time*(timestep-1) + time.time()-stime) / (timestep)
+                # Added 18 May 2024 00:26, added zero-temp-filter for preventing something awful result
+                util.min_temp_filter(self.modelData, self.modelConfig, targetStep=timestep)
+                pass
+            print()
             pass
-        print()
+        else:
+            for timestep in range(2, nt):
+                estimated_time_left = round((nt-1-timestep) * mean_step_time, 2)
+                # Progress Message
+                print(f"\rProcessing: {timestep}/{nt-1} ({round((timestep/nt)*100, 2)}%) | Time Left: {estimated_time_left} s  ", end='')
+                stime = time.time()
+                util.fdm_time_trapezoidal(self.modelData, self.modelConfig, targetStep=timestep, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc, filterRT=filterRT, filterTemp=filterTemp)
+                mean_step_time = (mean_step_time*(timestep-1) + time.time()-stime) / (timestep)
+                # Added 18 May 2024 00:26, added zero-temp-filter for preventing something awful result
+                util.min_temp_filter(self.modelData, self.modelConfig, targetStep=timestep)
+                pass
+            print()
+            pass
         pass
     pass    
     
