@@ -6,13 +6,16 @@ modelIOConfig:
   aLwProfilePath: ../data/a_lw_profile.txt            # FilePath to Profile txt of absorvity of longwave (> 4 micrometer)
   initTProfilePath: ../data/init_T_profile.txt        # FilePath to Profile txt of Initial Temperature for the model
   densityProfilePath: ../data/density_profile.txt     # FilePath to Profile txt of Atmospheric Density Profile
-  outputPath: ./output                               # The output directory where the temperature(t, z) will be saved into.
+  outputPath: ../output                               # The output directory where the temperature(t, z) will be saved into.
 modelStructureConfig:
-  dz: 1000                                            # the vertical cell gap length, in meter
-  dt: 10                                              # the time gap in seconds
-  dx: 1000                                            # the horizontal cell gap length, in longitudal-direction, in meter
-  dy: 1000                                            # the horizontal cell gap length, in latitudual-direction, in meter
+  filter: TEMP                                          # equilibrium-maintain filter mode: RT -> RadiativeFilter, TEMP -> TemperatureFilter, BOTH -> RadiativeFilter & TemperatureFilter
+  tolerationCount: 1                                  # equilibrium-maintain filter toleration Count: must be greater or equal than 0, integer. Use >2 if TEMP filter is Used.
+  solarConstant: 1630                                 # solar-constant from TOA, in W/m2
+  dz: 5000                                            # the vertical cell gap length, in meter
+  dt: 600                                             # the time gap in seconds
+  dx: 5000                                            # the horizontal cell gap length, in longitudal-direction, in meter
+  dy: 5000                                            # the horizontal cell gap length, in latitudual-direction, in meter
   nz: 21                                             # total vertical layer count
   nt: 10000                                          # total timestep count
-  Csua: 2092000000000.                               # Heat Capacity of the Surface, per unit area. in J/K m^2
+  Csua: 3326280.                                     # Heat Capacity of the Surface, per unit area. in J/K m^2
   

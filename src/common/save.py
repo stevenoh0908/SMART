@@ -5,7 +5,7 @@ common/save.py
 Created: 2024-05-14 11:16:38
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-21 07:01:22
+Last Modified: 2024-05-21 10:02:59
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Result Save Functions
@@ -18,7 +18,7 @@ sys.path.append('../common')
 from common.datastructures import *
 
 def getTimestamp():
-    return datetime.datetime.now().strftime("%T%m%dT%H%M%S")
+    return datetime.datetime.now().strftime("%Y%m%dT%H%M%S")
 
 def saveResult(modelData, modelConfig):
     if (type(modelData) != ModelData):

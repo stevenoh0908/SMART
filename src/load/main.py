@@ -5,8 +5,8 @@ load/main.py
 Created: 2024-05-14 11:49:56
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-17 03:38:54
-Last Modified: 2024-05-17 03:38:54
+Last Modified: 2024-05-22 12:07:23
+Last Modified: 2024-05-22 12:07:23
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Load Module.
@@ -115,6 +115,9 @@ class Driver:
         modelIOConfig.densityProfilePath = config_io['densityProfilePath']
         modelIOConfig.outputPath = config_io['outputPath']
         config_structure = config['modelStructureConfig']
+        modelStructureConfig.filter = str(config_structure['filter'])
+        modelStructureConfig.tolerationCount = int(config_structure['tolerationCount'])
+        modelStructureConfig.solarConstantIncident = float(config_structure['solarConstantIncident'])
         modelStructureConfig.dz = float(config_structure['dz'])
         modelStructureConfig.dt = float(config_structure['dt'])
         modelStructureConfig.dx = float(config_structure['dx'])

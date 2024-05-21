@@ -5,17 +5,18 @@ fdm/main.py
 Created: 2024-05-16 06:14:14
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-18 12:27:01
+Last Modified: 2024-05-21 11:27:28
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Finite Difference Method Main Module
 '''
 
-import sys
+import sys, time
 sys.path.append('../common')
 from common.datastructures import *
 import numpy as np
 import fdm.util as util
+import fdm.filter
 
 class Driver:
     
@@ -84,20 +85,37 @@ class Driver:
         * Otherwise, use Trapezoidal.
         '''
         nt = self.modelConfig.modelStructureConfig.nt
-        # Forward-Euler for the first-timestep
-        # DEBUG MESSAGE
-        print(f"Processing: 1/{nt-1}")
-        util.fdm_time_forward_euler(self.modelData, self.modelConfig, targetStep=1, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc)
-        # For Other-timesteps, use trapezoidal
-        for timestep in range(2, nt):
+        # Init Filter
+        filterRT = None
+        filterTemp = None
+        if (self.modelConfig.modelStructureConfig.filter in ['RT', 'BOTH']):
             # DEBUG MESSAGE
-            print(f"Processing: {timestep}/{nt-1}")
-            util.fdm_time_trapezoidal(self.modelData, self.modelConfig, targetStep=timestep, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc)
+            print('RT-equilibrium maintaining filter ENABLED')
+            filterRT = fdm.filter.FilterRadiativeSign(self.modelConfig, tolerationCount=self.modelConfig.modelStructureConfig.tolerationCount)
+            pass
+        if (self.modelConfig.modelStructureConfig.filter in ['TEMP', 'BOTH']):
+            # DEBUG MESSAGE
+            print('TEMP-equilibrium maintaining filter ENABLED')
+            filterTemp = fdm.filter.FilterTemperatureDelta(self.modelConfig, tolerationCount=self.modelConfig.modelStructureConfig.tolerationCount)
+            pass
+        # Forward-Euler for the first-timestep
+        # Progress Message
+        print(f"Processing: 1/{nt-1} ({round((1/nt)*100, 2)}%) | Time Left: Calculating", end='')
+        stime = time.time()
+        util.fdm_time_forward_euler(self.modelData, self.modelConfig, targetStep=1, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc, filterRT=filterRT, filterTemp=filterTemp)
+        # For Other-timesteps, use trapezoidal
+        mean_step_time = time.time() - stime
+        for timestep in range(2, nt):
+            estimated_time_left = round((nt-1-timestep) * mean_step_time, 2)
+            # Progress Message
+            print(f"\rProcessing: {timestep}/{nt-1} ({round((timestep/nt)*100, 2)}%) | Time Left: {estimated_time_left} s  ", end='')
+            stime = time.time()
+            util.fdm_time_trapezoidal(self.modelData, self.modelConfig, targetStep=timestep, atmoForcingFunc=self.atmoForcingFunc, surfForcingFunc=self.surfForcingFunc, filterRT=filterRT, filterTemp=filterTemp)
+            mean_step_time = (mean_step_time*(timestep-1) + time.time()-stime) / (timestep)
             # Added 18 May 2024 00:26, added zero-temp-filter for preventing something awful result
             util.min_temp_filter(self.modelData, self.modelConfig, targetStep=timestep)
             pass
-        # DEBUG MESAGE
-        print("DONE!")
+        print()
         pass
     pass    
     

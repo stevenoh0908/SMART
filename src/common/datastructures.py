@@ -5,7 +5,7 @@ common/datastructures.py
 Created: 2024-05-14 11:16:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-21 07:01:11
+Last Modified: 2024-05-22 12:07:35
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Defines and Manages Common Data Structures Among the Whole Model.
@@ -30,6 +30,9 @@ class ModelIOConfig:
 
 @dataclass
 class ModelStructureConfig:
+    filter: str = 'BOTH' # equilibrium-maintain filter mode
+    tolerationCount: int = 1 # equilibrium-maintain filter toleration count
+    solarConstantIncident: float = 340 # incident solar-constant, in W/m2
     dz: float = 100. # m
     dt: float = 600. # sec
     dx: float = 100. # m
