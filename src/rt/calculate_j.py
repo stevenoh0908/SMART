@@ -12,10 +12,20 @@ sb_cons=5.67*(10**-8)
 import math
 import numpy as np
 
-""" bring abs_coefficient & absorptivity from txt files
-abt_sw_profile=
-abt_lw_profile=
-"""
+#data.abt_sw_profile 읽어 와서 리스트로 추가
+abt_sw_profile = open("../../data/a_sw_profile.txt",'r')
+abt_sw_prof = abt_sw_profile.readlines()
+for line in lines:
+    line = line.strip()  # 줄 끝의 줄 바꿈 문자를 제거한다.
+abt_sw_profile.close()
+
+#data.abt_lw_profile 읽어 와서 리스트로 추가
+abt_lw_profile=open("../../data/a_lw_profile.txt",'r')
+abt_lw_prof = abt_sw_profile.readlines()
+for line in lines:
+    line = line.strip()  # 줄 끝의 줄 바꿈 문자를 제거한다.
+abt_sw_profile.close()
+
 
 class J_calc:
     def __init__(self,del_x,del_y,abt_sw_profile,abt_lw_profile,t_profile):
