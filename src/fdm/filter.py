@@ -12,7 +12,7 @@ Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 '''
 
 import sys
-sys.path.append('../common')
+sys.path.append('..\\common')
 from common.datastructures import *
 import numpy as np
 

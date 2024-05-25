@@ -12,7 +12,7 @@ Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 '''
 
 import sys
-sys.path.append('../common')
+sys.path.append('..\\common')
 from common.constants import *
 from common.datastructures import *
 import numpy as np
@@ -36,17 +36,17 @@ def atmo_forcing(modelData, modelConfig, timestep=1):
     for iz in range(1, nz):
         mass = modelConfig.modelStructureConfig.dx * modelConfig.modelStructureConfig.dy * modelConfig.modelStructureConfig.dz * modelData.densityProfile[iz-1]
         coef = modelData.aLwProfile[iz-1] * STEFAN_BOLTZMANN_CONST * dx * dy
-        first_arg = 0.
+        upward_arg = 0.
         for k in range(1, iz):
-            first_arg += modelData.aLwProfile[k-1]*(modelData.temperature[timestep,k]**4)*util.transmisttance(modelData, modelConfig, startIdx=k-0.5, endIdx=iz-1,type=util.TYPE_LW)
+            upward_arg += modelData.aLwProfile[k-1]*(modelData.temperature[timestep,k]**4)*util.transmisttance(modelData, modelConfig, startIdx=k-0.5, endIdx=iz-1,type=util.TYPE_LW)
             pass
-        second_arg = 0.
+        downward_arg = 0.
         for k in range(iz+1, nz):
-            second_arg += modelData.aLwProfile[k-1]*(modelData.temperature[timestep,k]**4)*util.transmisttance(modelData,modelConfig,startIdx=iz,endIdx=k-0.5,type=util.TYPE_LW)
+            downward_arg += modelData.aLwProfile[k-1]*(modelData.temperature[timestep,k]**4)*util.transmisttance(modelData,modelConfig,startIdx=iz,endIdx=k-0.5,type=util.TYPE_LW)
             pass
-        third_arg = 2*modelData.temperature[timestep,iz]**4
-        surf_arg = STEFAN_BOLTZMANN_CONST * dx * dy * (modelData.temperature[timestep, 0]**4) * util.transmisttance(modelData, modelConfig, startIdx=0, endIdx=iz)
-        forcing[iz] = (coef*(first_arg+second_arg-third_arg) + surf_arg) / mass
+        emission_arg = 2*(modelData.temperature[timestep,iz]**4)
+        surf_arg = STEFAN_BOLTZMANN_CONST * dx * dy * (modelData.temperature[timestep, 0]**4) * util.transmisttance(modelData, modelConfig, startIdx=0, endIdx=iz,type=util.TYPE_LW)*modelData.aLwProfile[iz-1]
+        forcing[iz] = (coef*(upward_arg+downward_arg-emission_arg) + surf_arg) / mass
         pass
     return forcing[1:]
 
@@ -69,6 +69,6 @@ def surf_forcing(modelData, modelConfig, timestep=1):
         forcing_down += modelData.aLwProfile[k-1]*(modelData.temperature[timestep, k]**4)*util.transmisttance(modelData, modelConfig, startIdx=0, endIdx=k-0.5, type=util.TYPE_LW)
         pass
     forcing_down *= STEFAN_BOLTZMANN_CONST * dx * dy
-    forcing_up = dx * dy * STEFAN_BOLTZMANN_CONST * modelData.temperature[timestep, 0]**4
+    forcing_up = dx * dy * STEFAN_BOLTZMANN_CONST * (modelData.temperature[timestep, 0]**4)
     forcing = forcing_down - forcing_up
     return forcing

@@ -18,14 +18,14 @@ import numpy as np
 # Model Configurations
 @dataclass
 class ModelIOConfig:
-    configPath: str = "./config.yml"
-    cPProfilePath: str = "./data/cp_profile.txt"
-    RProfilePath: str = "./data/R_profile.txt"
-    aSwProfilePath: str = "./data/a_sw_profile.txt"
-    aLwProfilePath: str = "./data/a_lw_profile.txT"
-    initTProfilePath: str = "./data/init_T_profile.txt"
-    densityProfilePath: str = "./data/density_profile.txt"
-    outputPath: str = "../output"
+    configPath: str = ".\\config.yml"
+    cPProfilePath: str = ".\\data\\cp_profile.txt"
+    RProfilePath: str = ".\\data\\R_profile.txt"
+    aSwProfilePath: str = ".\\data\\a_sw_profile.txt"
+    aLwProfilePath: str = ".\\data\\a_lw_profile.txT"
+    initTProfilePath: str = ".\\data\\init_T_profile.txt"
+    densityProfilePath: str = ".\\data\\density_profile.txt"
+    outputPath: str = "..\\output"
     pass
 
 @dataclass

@@ -14,7 +14,7 @@ Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 import os, sys, datetime, pickle
 import xarray as xr
 import numpy as np
-sys.path.append('../common')
+sys.path.append('..\\')
 from common.datastructures import *
 
 def getTimestamp():

@@ -24,7 +24,7 @@ class Driver:
 	config = None
 	data = None
 
-	def __init__(self, configyaml_dir="./config.yml"):
+	def __init__(self, configyaml_dir=".\\config.yml"):
 		# Info Message
 		print(f"Loading Inputs and Settings from: {configyaml_dir}")
 		loader = load.main.Driver()
@@ -48,7 +48,7 @@ class Driver:
 	pass
 
 def run():
-	configyaml_dir = "./config.yml"
+	configyaml_dir = ".\\config.yml"
 	if len(sys.argv) > 1 and os.path.isfile(sys.argv[1]):
 		configyaml_dir = sys.argv[1]
 		pass

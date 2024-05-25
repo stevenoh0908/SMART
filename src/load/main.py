@@ -15,7 +15,7 @@ Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 
 import sys, os
 import numpy as np
-sys.path.append('../common')
+sys.path.append('..\\common')
 from common.constants import *
 from common.datastructures import *
 import yaml
