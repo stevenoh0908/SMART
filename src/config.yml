@@ -12,7 +12,7 @@ modelStructureConfig:
   tolerationCount: 1                                  # equilibrium-maintain filter toleration Count: must be greater or equal than 0, integer. Use >2 if TEMP filter is Used.
   solarConstantIncident: 340                                 # solar-constant from TOA, in W/m2
   dz: 5000                                            # the vertical cell gap length, in meter
-  dt: 60                                             # the time gap in seconds
+  dt: 600                                             # the time gap in seconds
   dx: 5000                                            # the horizontal cell gap length, in longitudal-direction, in meter
   dy: 5000                                            # the horizontal cell gap length, in latitudual-direction, in meter
   nz: 2                                             # total vertical layer count
