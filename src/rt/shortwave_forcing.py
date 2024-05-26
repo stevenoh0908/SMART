@@ -5,7 +5,7 @@ rt/shortwave_forcing.py
 Created: 2024-05-17 12:07:37
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-22 12:06:37
+Last Modified: 2024-05-26 03:31:23
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - SW Forcing Calculation Methods
@@ -37,7 +37,7 @@ def atmo_forcing(modelData, modelConfig, timestep=1):
         pass
     return forcing[1:]
 
-def surf_forcing(modelData, modelConfig, timestep=1): #여긴 틀린 거 없음
+def surf_forcing(modelData, modelConfig, timestep=1):
     solar_constant_incident = modelConfig.modelStructureConfig.solarConstantIncident
     if (type(modelData) != ModelData):
         raise TypeError("Type Miss: modelData is not in common.datastructures.ModelData")

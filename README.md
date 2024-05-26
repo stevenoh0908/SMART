@@ -9,22 +9,23 @@
 - Dongwon Kang
 
 ## TODO
-1. Construct the code of SMART Model
-	- Construct FDM Module: Yooshin Oh
-	- Construct J-Calculation Module: Dongwon Kang
-2. Finding Initial Conditions: Hyeongjoon Byeon, Yoonsung Lee
-	- Find Initial Temperature Profile ($T(0, z)$)
-	- Calculate $c_p(z)$, $R(z)$
+[x] Construct the code of SMART Model 
+	[x] Construct FDM & RT Module: Yooshin Oh
+	[x] Construct & Verify RT Calculation Module: Dongwon Kang
+[x] Finding Initial Conditions: Hyeongjoon Byeon, Yoonsung Lee
+	[x] Find Initial Temperature Profile ( $T(0, z)$ )
+	[x] Calculate $c_p(z)$, $R(z)$
 		- This should be followed by $\bar{M}(z)$ and $\omega_{material}(z)$, $\rho_{air}(z)$, $k_{a, material}$.
 		- If needed, add some appropriate assumption to make a initial profile of above quantities.
 		- Also Total Number of the vertical Cell and the Maximum Heights should be determined from the available references of the above quantities.
-	- If needed, contact to the professor to find out the references.
-3. Integrating Initial Condition Arrays and Modules & Debugging: Yooshin Oh
-4. Plotting Result, Making Slides & Preparing the Presentation: All Contributors (?)
+	[x] If needed, contact to the professor to find out the references.
+[x] Integrating Initial Condition Arrays and Modules & Debugging: Yooshin Oh, Dongwon Kang
+[ ] Plotting Result, Making Slides & Preparing the Presentation: All Contributors
 
 ## Direction of the project
-1. 산불이 났을 때 Black Carbon이 방출될 경우 Multi-layered RT Model에서 온도와 지표온 Profile
-2. 화산 폭발의 에어로졸이 성층권 등에 유입될 경우 SW 반사 효과를 무시할 때 Multi-layered RT Model의 계산된 대기 온도 Profile, 지표온의 알려진 연구와의 비교를 통해 SW의 중요성 평가하기
+1. Clear-sky일 때 Multi-layer 대기 온도 Profile
+2. 산불이 났을 때 Black Carbon이 방출될 경우 Multi-layered RT Model에서 온도와 지표온 Profile
+3. 화산 폭발의 에어로졸이 성층권 등에 유입될 경우 SW 반사 효과를 무시할 때 Multi-layered RT Model의 계산된 대기 온도 Profile, 지표온의 알려진 연구와의 비교를 통해 SW의 중요성 평가하기
 
 ## Major Assumptions of this Model
 1. No Reflection or Scattering are considered except for SW Reflection on the Surface due to the Planetory Albedo.

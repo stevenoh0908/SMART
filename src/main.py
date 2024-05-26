@@ -5,7 +5,7 @@ src/main.py
 Created: 2024-05-14 09:52:09
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-21 11:17:06
+Last Modified: 2024-05-26 03:31:54
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 - Main Driver Module of SMART Model.
@@ -54,7 +54,7 @@ def run():
 		pass
 	print('''
 ---
-SMART (Single-column Multi-layered Atmospheric Radiative Transfer) Model | v0.1
+SMART (Single-column Multi-layered Atmospheric Radiative Transfer) Model | v1.0
 * ⓒ Yooshin Oh, Yoonsung Lee, Hyeongjoon Byeon, Dongwon Kang / 2024, Seoul National Univ.
 * Github Repo: https://github.com/stevenoh0908/SMART
 ---

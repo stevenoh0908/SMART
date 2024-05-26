@@ -24,8 +24,8 @@ You can download and install the model via the following steps.
 ### About Profile TXT
 * Put value of the physical quantities in each line.
 * Note that the first line corresponds to the quantity of the lowest height, and the last line corresponds to the quantity of the highest height.
-* Keep in mind only initial temperature profile txt file should be nz-lined file.
-* All other profile txt files should have nz-1 lines.
+* Keep in mind only initial temperature profile txt file should be `nz`-lined file.
+* All other profile txt files should have `nz-1` lines.
 
 ### Configuration File Guide (`config.yml`)
 * The configuration file, located in `src/config.yml` has the followig two sections.
@@ -80,6 +80,6 @@ You can download and install the model via the following steps.
     1. A single python pickle file: `result_modelData_timestamp.pkl`
     2. A NetCDF4 file: `result_temperature_timestamp.nc`
 * The first output file, the python pickle file contains all information about a single model run, including its configurations, the data used in the model and the final temperature output.
-    * This file is just a serialization of the `common.datastructures.ModelResult` dataclass, therefore you can just load the file via python Pickle module in python environment, and read it. (Note. before this you should import `common.datastructures` into your environment.
+    * This file is just a serialization of the `common.datastructures.ModelResult` dataclass, therefore you can just load the file via python Pickle module in python environment, and read it. (Note. before this you should import `common.datastructures` into your environment)
 * The second output file, the NetCDF4 file contains the temperature profiles among all timesteps in the model run, with proper explanations and the coordinates.
     * You can load and read this file via python xarray module or something-other modules like that. Refer internet documentations for more information.

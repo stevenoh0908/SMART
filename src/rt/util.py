@@ -5,7 +5,7 @@ rt/util.py
 Created: 2024-05-17 12:07:31
 Author: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
-Last Modified: 2024-05-22 12:41:50
+Last Modified: 2024-05-26 03:30:52
 Modified By: Yooshin Oh (stevenoh0908@snu.ac.kr)
 -----
 * SMART Radiation Transfer - Utility Functions
@@ -22,6 +22,7 @@ TYPE_LW = 1
 
 # Methods
 # Updated on 22 May 2024, Added Support for Half-Cell-Through Transmittance
+# Updated on 26 May 2024, Modified Transmittance Procedure: Dongwon Kang
 def transmisttance(modelData, modelConfig, startIdx=0, endIdx=0, type=TYPE_SW):
     if (startIdx % 0.5 != 0):
         raise ValueError("startIdx is not Half-integer")
