@@ -9,18 +9,18 @@
 - Dongwon Kang
 
 ## TODO
-[x] Construct the code of SMART Model 
-	[x] Construct FDM & RT Module: Yooshin Oh
-	[x] Construct & Verify RT Calculation Module: Dongwon Kang
-[x] Finding Initial Conditions: Hyeongjoon Byeon, Yoonsung Lee
-	[x] Find Initial Temperature Profile ( $T(0, z)$ )
-	[x] Calculate $c_p(z)$, $R(z)$
+- Construct the code of SMART Model 
+	- Construct FDM & RT Module: Yooshin Oh
+	- Construct & Verify RT Calculation Module: Dongwon Kang
+- Finding Initial Conditions: Hyeongjoon Byeon, Yoonsung Lee
+	- Find Initial Temperature Profile ( $T(0, z)$ )
+	- Calculate $c_p(z)$, $R(z)$
 		- This should be followed by $\bar{M}(z)$ and $\omega_{material}(z)$, $\rho_{air}(z)$, $k_{a, material}$.
 		- If needed, add some appropriate assumption to make a initial profile of above quantities.
 		- Also Total Number of the vertical Cell and the Maximum Heights should be determined from the available references of the above quantities.
-	[x] If needed, contact to the professor to find out the references.
-[x] Integrating Initial Condition Arrays and Modules & Debugging: Yooshin Oh, Dongwon Kang
-[ ] Plotting Result, Making Slides & Preparing the Presentation: All Contributors
+	- If needed, contact to the professor to find out the references.
+- Integrating Initial Condition Arrays and Modules & Debugging: Yooshin Oh, Dongwon Kang
+- Plotting Result, Making Slides & Preparing the Presentation: All Contributors
 
 ## Direction of the project
 1. Clear-sky일 때 Multi-layer 대기 온도 Profile
